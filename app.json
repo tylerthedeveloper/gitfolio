@@ -1,8 +1,9 @@
 {
   "expo": {
     "name": "Gitfolio",
-    "slug": "Gitfolio",
+    "slug": "gitfolio",
     "version": "1.0.0",
+    "scheme": "gitfolio",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {

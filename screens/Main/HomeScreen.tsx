@@ -1,12 +1,13 @@
 import React from 'react';
 import { SafeAreaView } from 'react-native';
 import { Button, Divider, Layout, TopNavigation } from '@ui-kitten/components';
-// import { NavigationProp } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { HomeStackParamList } from '../../navigation/navigation_types';
+
+type NavigationProp = StackNavigationProp<HomeStackParamList, 'Home'>;
 
 interface Props {
-    // navigation: NavigationScreenProp<NavigationState, NavigationParams>;
-    // navigation: NavigationScreenProp<NavigationProp>;
-    // navigation: StackNavigationProp<StackParamList, 'Home'>;
+    navigation: NavigationProp
 }
 
 const HomeScreen = ({ navigation }: Props) => {

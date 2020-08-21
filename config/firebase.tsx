@@ -14,14 +14,16 @@ const firebaseConfig = {
     measurementId: "G-Q1EZDK3LEQ"
 };
 
-try {
-    if (!firebase.apps.length) {
-        firebase.initializeApp(firebaseConfig);
-    }
-} catch (e) {
-    console.log(e.message);
-    // TODO:
-    // firebase.analytics();
-}
+// try {
+//     if (!firebase.apps.length) {
+//         firebase.initializeApp(firebaseConfig);
+//     }
+// } catch (e) {
+//     console.log(e.message);
+//     // TODO:
+//     // firebase.analytics();
+// }
 
-// export { firebaseConfig };
+// firebase.initializeApp(firebaseConfig);
+
+export {firebaseConfig};
