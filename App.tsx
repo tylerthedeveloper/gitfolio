@@ -28,32 +28,15 @@ export default function App() {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(false);
 
-  const { Navigator, Screen } = createStackNavigator<HomeStackParamList>();
-
-  const HomeNavigator = () => (
-    <Navigator headerMode='none' initialRouteName="Splash">
-      {
-        // state.isLoading ?
-        //   <AppStack.Screen name="ResolveAuth" component={ResolveAuthScreen}
-        //     options={{ headerTransparent: true, headerTitle: null }}
-        //   />
-        //   // FIXME:: (state.authUser === null)
-        (firebase.auth().currentUser === null)
-          ? <>
-            <Screen name='Splash' component={SplashScreen} />
-            <Screen name='Login' component={LoginScreen} />
-          </>
-          : <Screen name='Home' component={HomeScreen} />
-      }
-    </Navigator>
-  );
-
   // TODO: abstract this out?
-  useEffect(() => {
-    const usersRef = firebase.firestore().collection('users');
-    firebase.auth().onAuthStateChanged(user => {
+  const tryCacheSignIn = async () => {
+    // const usersRef = firebase.firestore().collection('users');
+    firebase.auth().onAuthStateChanged(async (user) => {
+      console.log('firebase.auth().currentUser', firebase.auth().currentUser === null)
       if (user) {
-        // console.log('[use effect in app auth changed] and now exists')
+        setUser(user)
+        // TODO: get user from FB
+        console.log('[use effect in app auth changed] and now exists')
         // usersRef
         //   .doc(user.uid)
         //   .get()
@@ -63,19 +46,35 @@ export default function App() {
         //     setUser(userData)
         //   })
         //   .catch((error) => {
-        setLoading(false)
+        // setLoading(false)
         //   });
       } else {
         // console.log('[use effect in app auth changed] NO USER',)
-        setLoading(false)
+        // setLoading(false)
       }
     });
+  };
+
+  useEffect(() => {
+    tryCacheSignIn();
   }, []);
+
+  const AppStack = createStackNavigator<HomeStackParamList>();
 
   return (
     <ApplicationProvider {...eva} theme={eva.light}>
       <NavigationContainer>
-        <HomeNavigator />
+        <AppStack.Navigator headerMode='none' initialRouteName="Splash">
+          {
+            // (firebase.auth().currentUser === null)
+            (user === {})
+              ? (<>
+                <AppStack.Screen name='Splash' component={SplashScreen} />
+                <AppStack.Screen name='Login' component={LoginScreen} />
+              </>)
+              : <AppStack.Screen name='Home' component={HomeScreen} />
+          }
+        </AppStack.Navigator>
       </NavigationContainer>
     </ApplicationProvider>
   );
