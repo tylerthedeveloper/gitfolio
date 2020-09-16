@@ -46,7 +46,7 @@ export default function App() {
         //     setUser(userData)
         //   })
         //   .catch((error) => {
-        // setLoading(false)
+      // setLoading(false)
         //   });
       } else {
         // console.log('[use effect in app auth changed] NO USER',)

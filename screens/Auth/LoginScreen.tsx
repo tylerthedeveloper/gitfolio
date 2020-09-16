@@ -107,7 +107,6 @@ const LoginScreen = ({ navigation }: Props) => {
             const credential = firebase.auth.GithubAuthProvider.credential(access_token); // oauth token
             // console.log('credential', credential.accessToken || '')
             await AsyncStorage.setItem('github_oauth', credential.accessToken || '');
-            await firebase.auth().signOut();
             const githubUser = await firebase.auth().signInWithCredential(credential); // github user account
             // console.log('user exists!!! ', user);
             const { additionalUserInfo, user } = githubUser;
